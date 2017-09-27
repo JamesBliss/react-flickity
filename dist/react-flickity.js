@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["React"], factory);
 	else if(typeof exports === 'object')
-		exports["uiKit"] = factory(require("React"));
+		exports["reactFlickity"] = factory(require("React"));
 	else
-		root["uiKit"] = factory(root["React"]);
+		root["reactFlickity"] = factory(root["React"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

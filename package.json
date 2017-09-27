@@ -1,6 +1,6 @@
 {
   "name": "@jamesbliss/react-flickity",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Flickity in react",
   "main": "./dist/modules/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "James Bliss",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/JamesBliss/react-flickity.git"
   },
   "license": "MIT",
   "dependencies": {

@@ -5,7 +5,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { 
+      {
         test: /\.jsx?$/,
         loader: 'babel?stage=0',
         exclude: /node_modules/
@@ -19,9 +19,9 @@ module.exports = {
 
   // TODO: use your component name here
   output: {
-    filename: 'dist/ui-kit.js',
+    filename: 'dist/react-flickity.js',
     libraryTarget: 'umd',
-    library: 'uiKit'
+    library: 'reactFlickity'
   },
 
   plugins: [

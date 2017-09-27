@@ -7,7 +7,7 @@ import './storybook.scss';
 
 setOptions({
   name: 'react-flickity',
-  url: 'https://gitlab.frontendserviceaccount.com/manager-component/ui-kit'
+  url: 'https://github.com/JamesBliss/react-flickity'
 })
 
 function loadStories() {
