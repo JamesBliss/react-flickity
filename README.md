@@ -1,4 +1,5 @@
-# React flickity
+#
+git
 
 This repo contains code of multiple UI elements. Based on https://github.com/theolampert/react-flickity-component
 
@@ -9,7 +10,7 @@ This repo contains code of multiple UI elements. Based on https://github.com/the
 Install
 
 ```
-yarn add @lushdigital/core-ui-kit
+yarn add @jamesbliss/react-flickity
 ```
 
 Include the component at the top of the component it's required in.
