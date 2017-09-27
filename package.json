@@ -1,14 +1,14 @@
 {
   "name": "@jamesbliss/react-flickity",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "Flickity in react",
   "main": "./dist/modules/index.js",
   "scripts": {
     "bundle-dist": "webpack --config webpack.js",
     "bundle-modules": "rm -rf dist/modules/ && babel src --loose --out-dir dist/modules",
     "bundle": "npm run bundle-dist && npm run bundle-modules",
-    "demo": "start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006",
+    "demo": "start-storybook -p 6007",
+    "storybook": "start-storybook -p 6007",
     "build-storybook": "build-storybook",
     "lint": "eslint ./src",
     "test": "npm run lint && mocha -R spec --compilers jsx:test/compiler.js ./src/*Test.jsx"

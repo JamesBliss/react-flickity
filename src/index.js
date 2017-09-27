@@ -19,7 +19,7 @@ class FlickityComponent extends Component {
   }
 
   updateSelected() {
-    const { onSwipe } = this.props;
+    const { onSwipe, onCellSelected } = this.props;
     const index = this.flkty.selectedIndex;
 
     this.setState({
@@ -28,17 +28,16 @@ class FlickityComponent extends Component {
     if (onSwipe) {
       onSwipe(index);
     }
+    if (onCellSelected) {
+      onCellSelected({ flkty: this.flkty, index: this.flkty.selectedIndex });
+    }
   }
 
   componentDidUpdate() {
-    const { updateFlkty, reloadOnUpdate } = this.props;
+    const { reloadOnUpdate } = this.props;
 
     if (reloadOnUpdate) {
       this.flkty.reloadCells();
-    }
-
-    if (updateFlkty) {
-      updateFlkty(this.flkty);
     }
   }
 
@@ -62,6 +61,69 @@ class FlickityComponent extends Component {
     }
   }
 
+  build = () => {
+    const { onBuild } = this.props;
+    if (onBuild) {
+      onBuild(this.flkty);
+    }
+  }
+
+  updateStaticClick = (event, pointer, cellElement, cellIndex) => {
+    const { onStaticClick } = this.props;
+
+    if (onStaticClick) {
+      onStaticClick({ flkty: this.flkty, event, pointer, cellElement, cellIndex });
+    }
+  }
+
+  updateDragStart = (event, pointer) => {
+    const { onDragStart } = this.props;
+
+    if (onDragStart) {
+      onDragStart({ flkty: this.flkty, event, pointer });
+    }
+  }
+
+  updateDragMove = (event, pointer, moveVector) => {
+    const { onDragMove } = this.props;
+
+    if (onDragMove) {
+      onDragMove({ flkty: this.flkty, event, pointer, moveVector });
+    }
+  }
+
+  updateDragEnd = (event, pointer) => {
+    const { onDragEnd } = this.props;
+
+    if (onDragEnd) {
+      onDragEnd({ flkty: this.flkty, event, pointer });
+    }
+  }
+
+  updateScroll = (progress) => {
+    const { onScroll } = this.props;
+
+    if (onScroll) {
+      onScroll({ flkty: this.flkty, progress });
+    }
+  }
+
+  updateSettle = () => {
+    const { onSettle } = this.props;
+
+    if (onSettle) {
+      onSettle({ flkty: this.flkty, index: this.flkty.selectedIndex });
+    }
+  }
+
+  updateSelect = () => {
+    const { onSelect } = this.props;
+
+    if (onSelect) {
+      onSelect({ flkty: this.flkty, index: this.flkty.selectedIndex });
+    }
+  }
+
   componentDidMount() {
     const { options } = this.props;
     const carousel = this.carousel;
@@ -69,6 +131,14 @@ class FlickityComponent extends Component {
     if (canUseDOM) {
       this.flkty = new Flickity(carousel, options);
       this.flkty.on('cellSelect', this.updateSelected);
+      this.flkty.on('dragStart', this.updateDragStart);
+      this.flkty.on('dragMove', this.updateDragMove);
+      this.flkty.on('dragEnd', this.updateDragEnd);
+      this.flkty.on('scroll', this.updateScroll);
+      this.flkty.on('settle', this.updateSettle);
+      this.flkty.on('select', this.updateSelect);
+      this.flkty.on('staticClick', this.updateStaticClick);
+      this.build();
       this.imagesLoaded();
     }
   }
@@ -97,7 +167,15 @@ FlickityComponent.propTypes = {
   elementType: PropTypes.string,
   children: PropTypes.array,
   onSwipe: PropTypes.func,
-  updateFlkty: PropTypes.func
+  onStaticClick: PropTypes.func,
+  onDragStart: PropTypes.func,
+  onDragMove: PropTypes.func,
+  onDragEnd: PropTypes.func,
+  onScroll: PropTypes.func,
+  onSettle: PropTypes.func,
+  onSelect: PropTypes.func,
+  onCellSelected: PropTypes.func,
+  onBuild: PropTypes.func
 };
 
 FlickityComponent.defaultProps = {
@@ -108,7 +186,16 @@ FlickityComponent.defaultProps = {
   elementType: 'div',
   onSwipe: null,
   children: null,
-  updateFlkty: null
+  updateFlkty: null,
+  onStaticClick: null,
+  onDragStart: null,
+  onDragMove: null,
+  onDragEnd: null,
+  onScroll: null,
+  onSettle: null,
+  onSelect: null,
+  onBuild: null,
+  onCellSelected: null
 };
 
 export default FlickityComponent;
