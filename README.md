@@ -23,12 +23,3 @@ Implement as follows
 ```javascript
   <Flickity />
 ```
-
-## Update package:
-
-2. increment package json version
-2. `npm run bundle`
-3. `npm publish`
-4. Push to git
-5. tag `git tag v0.0.1'
-6. `git push origin master --tags`
