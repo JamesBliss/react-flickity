@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -7,7 +7,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel?stage=0',
+        loader: 'babel',
         exclude: /node_modules/
       }
     ]
@@ -17,7 +17,6 @@ module.exports = {
     react: 'React'
   },
 
-  // TODO: use your component name here
   output: {
     filename: 'dist/react-flickity.js',
     libraryTarget: 'umd',

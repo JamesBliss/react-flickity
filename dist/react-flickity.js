@@ -92,9 +92,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _inherits(FlickityComponent, _Component);
 
 	  function FlickityComponent(props) {
+	    var _this = this;
+
 	    _classCallCheck(this, FlickityComponent);
 
 	    _get(Object.getPrototypeOf(FlickityComponent.prototype), 'constructor', this).call(this, props);
+
+	    this.build = function () {
+	      var onBuild = _this.props.onBuild;
+
+	      if (onBuild) {
+	        onBuild(_this.flkty);
+	      }
+	    };
 
 	    this.state = {
 	      selectedIndex: 0
@@ -107,56 +117,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(FlickityComponent, [{
-	    key: 'updateSelected',
-	    value: function updateSelected() {
-	      var onSwipe = this.props.onSwipe;
-
-	      var index = this.flkty.selectedIndex;
-
-	      this.setState({
-	        selectedIndex: index
-	      });
-	      if (onSwipe) {
-	        onSwipe(index);
-	      }
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      var _props = this.props;
-	      var updateFlkty = _props.updateFlkty;
-	      var reloadOnUpdate = _props.reloadOnUpdate;
-
-	      if (reloadOnUpdate) {
-	        this.flkty.reloadCells();
-	      }
-
-	      if (updateFlkty) {
-	        updateFlkty(this.flkty);
-	      }
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      if (this.flkty) {
-	        this.flkty.off('cellSelect', this.updateSelected);
-	        this.flkty.destroy();
-	      }
-	    }
-	  }, {
-	    key: 'imagesLoaded',
-	    value: function imagesLoaded() {
-	      var _this = this;
-
-	      var disableImagesLoaded = this.props.disableImagesLoaded;
-
-	      if (!disableImagesLoaded && _fbjsLibExecutionEnvironment.canUseDOM) {
-	        (0, _imagesloaded2['default'])(this.carousel, function (instance) {
-	          _this.flkty.reloadCells();
-	        });
-	      }
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var options = this.props.options;
@@ -166,13 +126,143 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (_fbjsLibExecutionEnvironment.canUseDOM) {
 	        this.flkty = new _flickity2['default'](carousel, options);
 	        this.flkty.on('cellSelect', this.updateSelected);
+	        this.flkty.on('dragStart', this.updateDragStart);
+	        this.flkty.on('dragMove', this.updateDragMove);
+	        this.flkty.on('dragEnd', this.updateDragEnd);
+	        this.flkty.on('scroll', this.updateScroll);
+	        this.flkty.on('settle', this.updateSettle);
+	        this.flkty.on('select', this.updateSelect);
+	        this.flkty.on('staticClick', this.updateStaticClick);
+	        this.build();
 	        this.imagesLoaded();
+	      }
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var reloadOnUpdate = this.props.reloadOnUpdate;
+
+	      if (reloadOnUpdate) {
+	        this.flkty.reloadCells();
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      if (this.flkty) {
+	        this.flkty.off('cellSelect', this.updateSelected);
+	        this.flkty.off('cellSelect', this.updateSelected);
+	        this.flkty.off('dragStart', this.updateDragStart);
+	        this.flkty.off('dragMove', this.updateDragMove);
+	        this.flkty.off('dragEnd', this.updateDragEnd);
+	        this.flkty.off('scroll', this.updateScroll);
+	        this.flkty.off('settle', this.updateSettle);
+	        this.flkty.off('select', this.updateSelect);
+	        this.flkty.off('staticClick', this.updateStaticClick);
+	        this.flkty.destroy();
+	      }
+	    }
+	  }, {
+	    key: 'imagesLoaded',
+	    value: function imagesLoaded() {
+	      var _this2 = this;
+
+	      var disableImagesLoaded = this.props.disableImagesLoaded;
+
+	      if (!disableImagesLoaded && _fbjsLibExecutionEnvironment.canUseDOM) {
+	        (0, _imagesloaded2['default'])(this.carousel, function () {
+	          _this2.flkty.reloadCells();
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'updateSelected',
+	    value: function updateSelected() {
+	      var _props = this.props;
+	      var onSwipe = _props.onSwipe;
+	      var onCellSelected = _props.onCellSelected;
+
+	      var index = this.flkty.selectedIndex;
+
+	      this.setState({
+	        selectedIndex: index
+	      });
+
+	      if (onSwipe) {
+	        onSwipe(index);
+	      }
+
+	      if (onCellSelected) {
+	        onCellSelected({ flkty: this.flkty, index: this.flkty.selectedIndex });
+	      }
+	    }
+	  }, {
+	    key: 'updateStaticClick',
+	    value: function updateStaticClick(event, pointer, cellElement, cellIndex) {
+	      var onStaticClick = this.props.onStaticClick;
+
+	      if (onStaticClick) {
+	        onStaticClick({ flkty: this.flkty, event: event, pointer: pointer, cellElement: cellElement, cellIndex: cellIndex });
+	      }
+	    }
+	  }, {
+	    key: 'updateDragStart',
+	    value: function updateDragStart(event, pointer) {
+	      var onDragStart = this.props.onDragStart;
+
+	      if (onDragStart) {
+	        onDragStart({ flkty: this.flkty, event: event, pointer: pointer });
+	      }
+	    }
+	  }, {
+	    key: 'updateDragMove',
+	    value: function updateDragMove(event, pointer, moveVector) {
+	      var onDragMove = this.props.onDragMove;
+
+	      if (onDragMove) {
+	        onDragMove({ flkty: this.flkty, event: event, pointer: pointer, moveVector: moveVector });
+	      }
+	    }
+	  }, {
+	    key: 'updateDragEnd',
+	    value: function updateDragEnd(event, pointer) {
+	      var onDragEnd = this.props.onDragEnd;
+
+	      if (onDragEnd) {
+	        onDragEnd({ flkty: this.flkty, event: event, pointer: pointer });
+	      }
+	    }
+	  }, {
+	    key: 'updateScroll',
+	    value: function updateScroll(progress) {
+	      var onScroll = this.props.onScroll;
+
+	      if (onScroll) {
+	        onScroll({ flkty: this.flkty, progress: progress });
+	      }
+	    }
+	  }, {
+	    key: 'updateSettle',
+	    value: function updateSettle() {
+	      var onSettle = this.props.onSettle;
+
+	      if (onSettle) {
+	        onSettle({ flkty: this.flkty, index: this.flkty.selectedIndex });
+	      }
+	    }
+	  }, {
+	    key: 'updateSelect',
+	    value: function updateSelect() {
+	      var onSelect = this.props.onSelect;
+
+	      if (onSelect) {
+	        onSelect({ flkty: this.flkty, index: this.flkty.selectedIndex });
 	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var _props2 = this.props;
 	      var elementType = _props2.elementType;
@@ -182,7 +272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2['default'].createElement(elementType, {
 	        className: className,
 	        ref: function ref(c) {
-	          _this2.carousel = c;
+	          _this3.carousel = c;
 	        }
 	      }, children);
 	    }
@@ -199,7 +289,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  elementType: _propTypes2['default'].string,
 	  children: _propTypes2['default'].array,
 	  onSwipe: _propTypes2['default'].func,
-	  updateFlkty: _propTypes2['default'].func
+	  onStaticClick: _propTypes2['default'].func,
+	  onDragStart: _propTypes2['default'].func,
+	  onDragMove: _propTypes2['default'].func,
+	  onDragEnd: _propTypes2['default'].func,
+	  onScroll: _propTypes2['default'].func,
+	  onSettle: _propTypes2['default'].func,
+	  onSelect: _propTypes2['default'].func,
+	  onCellSelected: _propTypes2['default'].func,
+	  onBuild: _propTypes2['default'].func
 	};
 
 	FlickityComponent.defaultProps = {
@@ -208,9 +306,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  options: {},
 	  className: '',
 	  elementType: 'div',
-	  onSwipe: null,
 	  children: null,
-	  updateFlkty: null
+	  onSwipe: null,
+	  onStaticClick: null,
+	  onDragStart: null,
+	  onDragMove: null,
+	  onDragEnd: null,
+	  onScroll: null,
+	  onSettle: null,
+	  onSelect: null,
+	  onBuild: null,
+	  onCellSelected: null
 	};
 
 	exports['default'] = FlickityComponent;
