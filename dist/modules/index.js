@@ -28,7 +28,7 @@ class FlickityComponent extends Component {
       this.flkty.on('dragStart', (event, pointer) => this.updateDragStart(event, pointer));
       this.flkty.on('dragMove', (event, pointer, moveVector) => this.updateDragMove(event, pointer, moveVector));
       this.flkty.on('dragEnd', (event, pointer) => this.updateDragEnd(event, pointer));
-      this.flkty.on('scroll', (progress) => this.updateScroll(progress));
+      this.flkty.on('scroll', progress => this.updateScroll(progress));
       this.flkty.on('settle', () => this.updateSettle());
       this.flkty.on('select', () => this.updateSelect());
       this.flkty.on('staticClick', (event, pointer, cellElement, cellIndex) => this.updateStaticClick(event, pointer, cellElement, cellIndex));
@@ -154,16 +154,12 @@ class FlickityComponent extends Component {
   render() {
     const { elementType, className, children } = this.props;
 
-    return React.createElement(
-      elementType,
-      {
-        className,
-        ref: c => {
-          this.carousel = c;
-        }
-      },
-      children
-    );
+    return React.createElement(elementType, {
+      className,
+      ref: c => {
+        this.carousel = c;
+      }
+    }, children);
   }
 }
 

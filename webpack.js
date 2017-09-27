@@ -1,13 +1,19 @@
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
 
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loader: 'babel',
+        test: /\.js/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.jsx/,
+        loader: 'babel-loader',
         exclude: /node_modules/
       }
     ]
@@ -18,20 +24,13 @@ module.exports = {
   },
 
   output: {
-    filename: 'dist/react-flickity.js',
+    filename: 'react-flickity.js',
+    path: path.join(__dirname, 'dist'),
     libraryTarget: 'umd',
     library: 'reactFlickity'
   },
 
-  plugins: [
-    new webpack.optimize.DedupePlugin()
-  ],
-
   resolve: {
-    extensions: [
-      '',
-      '.jsx',
-      '.js'
-    ]
+    extensions: ['.jsx', '.js']
   }
 };
