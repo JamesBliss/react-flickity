@@ -1,6 +1,6 @@
 # React flickity
 
-This repo contains code of multiple UI elements. Storybook available https://jamesbliss.github.io/react-flickity
+Storybook available https://jamesbliss.github.io/react-flickity
 
 ---
 
