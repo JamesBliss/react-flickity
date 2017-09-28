@@ -11,7 +11,8 @@
     "storybook": "start-storybook -p 6007",
     "build-storybook": "build-storybook",
     "lint": "eslint ./src",
-    "test": "npm run lint && mocha -R spec --compilers jsx:test/compiler.js ./src/*Test.jsx"
+    "test": "npm run lint && mocha -R spec --compilers jsx:test/compiler.js ./src/*Test.jsx",
+    "gp-storybook": "build-storybook -s public -o .out"
   },
   "author": "James Bliss",
   "repository": {
@@ -51,6 +52,7 @@
     "@storybook/addon-actions": "^3.2.6",
     "@storybook/addon-links": "^3.2.6",
     "@storybook/react": "^3.2.8",
+    "@storybook/storybook-deployer": "^2.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^6.4.1",
     "classnames": "2.1.5",
