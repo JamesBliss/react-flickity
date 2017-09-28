@@ -12,7 +12,8 @@
     "build-storybook": "build-storybook",
     "lint": "eslint ./src",
     "test": "npm run lint && mocha -R spec --compilers jsx:test/compiler.js ./src/*Test.jsx",
-    "gp-storybook": "build-storybook -s public -o .out"
+    "gp-storybook": "build-storybook -s public -o .out",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "author": "James Bliss",
   "repository": {
