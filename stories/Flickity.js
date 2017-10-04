@@ -1,10 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import withReadme from 'storybook-readme/with-readme';
 
 // FEATURED COMPONENT //
-import Flickity from '../src';
+import Flickity from '../src/flickity';
 
 // Reusable functions and objects for stories
 function onStaticClick(object) {
@@ -54,11 +53,54 @@ stories.add('Flickity - basic',
         className={ 'ui-carousel__container' }
         options={ {} }
       >
-        <h1 style={ { background: 'red', width: '100%' } }>Slide one</h1>
-        <h1 style={ { background: 'lime', width: '100%' } }>Slide two</h1>
-        <h1 style={ { background: 'pink', width: '100%' } }>Slide three</h1>
-        <h1 style={ { background: 'blue', width: '100%' } }>Slide four</h1>
-        <h1 style={ { background: 'orange', width: '100%' } }>Slide five</h1>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?city' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?nature' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?people' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?london' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
+      </Flickity>
+    );
+  })
+);
+
+stories.add('Flickity - looping',
+  withInfo({ text: 'Basic carousel component' })(() => {
+    return (
+      <Flickity options={ { wrapAround: true } }>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?city' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?nature' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?people' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?london' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '100%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
+      </Flickity>
+    );
+  })
+);
+
+stories.add('Flickity - multiple in view',
+  withInfo({ text: 'Basic carousel component' })(() => {
+    return (
+      <Flickity options={ { wrapAround: true, initialIndex: 2 } }>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?city' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?nature' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?people' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?london' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
+      </Flickity>
+    );
+  })
+);
+
+stories.add('Flickity - Grouping',
+  withInfo({ text: 'Basic carousel component' })(() => {
+    return (
+      <Flickity options={ { groupCells: 2 } }>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?city' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?nature' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?people' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?london' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
+        <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?town' /></div>
       </Flickity>
     );
   })

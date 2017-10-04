@@ -7,7 +7,8 @@ import './storybook.scss';
 
 setOptions({
   name: 'react-flickity',
-  url: 'https://github.com/JamesBliss/react-flickity'
+  url: 'https://github.com/JamesBliss/react-flickity',
+  showDownPanel: false
 })
 
 function loadStories() {
