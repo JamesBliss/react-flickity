@@ -24,8 +24,7 @@ module.exports = {
   },
 
   output: {
-    filename: 'react-flickity.js',
-    path: path.join(__dirname, 'dist'),
+    filename: 'dist/react-flickity.js',
     libraryTarget: 'umd',
     library: 'reactFlickity'
   },

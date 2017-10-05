@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 // FEATURED COMPONENT //
-import Flickity from '../src/flickity';
+import Flickity from '../src';
 
 // Reusable functions and objects for stories
 function onStaticClick(object) {
