@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -7,13 +6,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test: /\.jsx/,
-        loader: 'babel-loader',
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
         exclude: /node_modules/
       }
     ]
@@ -23,6 +22,10 @@ module.exports = {
     react: 'React'
   },
 
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ],
+
   output: {
     filename: 'dist/react-flickity.js',
     libraryTarget: 'umd',
@@ -30,6 +33,10 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: [
+      '.jsx',
+      '.js',
+      '.scss'
+    ]
   }
 };
