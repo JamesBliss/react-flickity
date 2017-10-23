@@ -51,7 +51,9 @@ var FlickityComponent = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var options = this.props.options;
+      var _props = this.props,
+          options = _props.options,
+          flickityRef = _props.flickityRef;
 
       var carousel = this.carousel;
 
@@ -82,6 +84,10 @@ var FlickityComponent = function (_Component) {
           return _this2.updateStaticClick(event, pointer, cellElement, cellIndex);
         });
         this.build();
+
+        if (flickityRef) {
+          flickityRef(this.flkty);
+        }
       }
     }
   }, {
@@ -123,9 +129,9 @@ var FlickityComponent = function (_Component) {
   }, {
     key: 'updateSelected',
     value: function updateSelected() {
-      var _props = this.props,
-          onSwipe = _props.onSwipe,
-          onCellSelected = _props.onCellSelected;
+      var _props2 = this.props,
+          onSwipe = _props2.onSwipe,
+          onCellSelected = _props2.onCellSelected;
 
       var index = this.flkty.selectedIndex;
 
@@ -216,10 +222,10 @@ var FlickityComponent = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var _props2 = this.props,
-          elementType = _props2.elementType,
-          className = _props2.className,
-          children = _props2.children;
+      var _props3 = this.props,
+          elementType = _props3.elementType,
+          className = _props3.className,
+          children = _props3.children;
 
 
       return _react2.default.createElement(elementType, {
@@ -249,7 +255,8 @@ FlickityComponent.propTypes = {
   onSettle: _propTypes2.default.func,
   onSelect: _propTypes2.default.func,
   onCellSelected: _propTypes2.default.func,
-  onBuild: _propTypes2.default.func
+  onBuild: _propTypes2.default.func,
+  flickityRef: _propTypes2.default.func
 };
 
 FlickityComponent.defaultProps = {
@@ -267,7 +274,8 @@ FlickityComponent.defaultProps = {
   onSettle: null,
   onSelect: null,
   onBuild: null,
-  onCellSelected: null
+  onCellSelected: null,
+  flickityRef: null
 };
 
 exports.default = FlickityComponent;
