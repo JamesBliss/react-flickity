@@ -34,6 +34,26 @@ function onBuild(object) {
   console.log('onBuild => ', object);
 }
 
+let flickityInstance = null;
+
+function flickityPrevious() {
+  if (flickityInstance) {
+    flickityInstance.previous();
+  }
+}
+
+function flickityNext() {
+  if (flickityInstance) {
+    flickityInstance.next();
+  }
+}
+
+function flickitySelect2() {
+  if (flickityInstance) {
+    flickityInstance.select(1);
+  }
+}
+
 // Start of story logic
 const stories = storiesOf('Flickity', module);
 
@@ -102,6 +122,32 @@ stories.add('Flickity - Grouping',
         <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
         <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?town' /></div>
       </Flickity>
+    );
+  })
+);
+
+stories.add('Flickity - Flickity Expose and manual control',
+  withInfo({ text: 'Basic carousel component' })(() => {
+    return (
+      <div>
+
+        <div>
+          <Flickity flickityRef={(ref) => flickityInstance = ref}>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?city' /></div>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?nature' /></div>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?people' /></div>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?london' /></div>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?forest' /></div>
+            <div style={ { overflow: 'hidden', padding: 0, margin: 0, width: '50%' } }><img src='https://source.unsplash.com/1400x420/?town' /></div>
+          </Flickity>
+        </div>
+
+        <div style={{clear: 'both', marginTop: '25px'}}>
+          <button onClick={flickityPrevious}>Previous</button>
+          <button onClick={flickityNext}>Next</button>
+          <button onClick={flickitySelect2}>Select 2nd item</button>
+        </div>
+      </div>
     );
   })
 );
