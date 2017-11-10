@@ -2424,7 +2424,7 @@ var FlickityComponent = function (_Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      if (this.flkty) {
+      if (_ExecutionEnvironment.canUseDOM && this.flkty) {
         this.flkty.off('cellSelect', this.updateSelected);
         this.flkty.off('cellSelect', this.updateSelected);
         this.flkty.off('dragStart', this.updateDragStart);

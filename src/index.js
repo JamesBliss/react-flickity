@@ -43,7 +43,7 @@ class FlickityComponent extends Component {
   }
 
   componentWillUnmount() {
-    if (this.flkty) {
+    if (canUseDOM && this.flkty) {
       this.flkty.off('cellSelect', this.updateSelected);
       this.flkty.off('cellSelect', this.updateSelected);
       this.flkty.off('dragStart', this.updateDragStart);
