@@ -10,10 +10,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _flickity = require('flickity');
-
-var _flickity2 = _interopRequireDefault(_flickity);
-
 var _ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');
 
 var _propTypes = require('prop-types');
@@ -27,6 +23,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Flickity = void 0;
+if (_ExecutionEnvironment.canUseDOM) {
+  Flickity = require('flickity');
+}
 
 var FlickityComponent = function (_Component) {
   _inherits(FlickityComponent, _Component);
@@ -58,7 +59,7 @@ var FlickityComponent = function (_Component) {
       var carousel = this.carousel;
 
       if (_ExecutionEnvironment.canUseDOM) {
-        this.flkty = new _flickity2.default(carousel, options);
+        this.flkty = new Flickity(carousel, options);
         this.flkty.on('cellSelect', function () {
           return _this2.updateSelected();
         });
