@@ -4,7 +4,7 @@
   "description": "Flickity in react",
   "main": "./dist/modules/index.js",
   "scripts": {
-    "bundle-dist": "webpack --config webpack.js",
+    "bundle-dist": "webpack",
     "bundle-modules": "rm -rf dist/modules/ && babel src --loose --out-dir dist/modules",
     "bundle": "npm run bundle-dist && npm run bundle-modules",
     "demo": "start-storybook -p 6007",
@@ -28,8 +28,8 @@
     "node-sass": "^4.5.3",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
     "sass-loader": "^6.0.6",
     "yarn": "1.0.2"
   },

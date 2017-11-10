@@ -20,7 +20,7 @@ class FlickityComponent extends Component {
   }
 
   componentDidMount() {
-    const { options } = this.props;
+    const { options, flickityRef } = this.props;
     const carousel = this.carousel;
 
     if (canUseDOM) {
@@ -34,6 +34,10 @@ class FlickityComponent extends Component {
       this.flkty.on('select', () => this.updateSelect());
       this.flkty.on('staticClick', (event, pointer, cellElement, cellIndex) => this.updateStaticClick(event, pointer, cellElement, cellIndex));
       this.build();
+
+      if (flickityRef) {
+        flickityRef(this.flkty);
+      }
     }
   }
 
@@ -172,7 +176,8 @@ FlickityComponent.propTypes = {
   onSettle: PropTypes.func,
   onSelect: PropTypes.func,
   onCellSelected: PropTypes.func,
-  onBuild: PropTypes.func
+  onBuild: PropTypes.func,
+  flickityRef: PropTypes.func
 };
 
 FlickityComponent.defaultProps = {
@@ -190,7 +195,8 @@ FlickityComponent.defaultProps = {
   onSettle: null,
   onSelect: null,
   onBuild: null,
-  onCellSelected: null
+  onCellSelected: null,
+  flickityRef: null
 };
 
 export default FlickityComponent;
