@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import Flickity from 'flickity';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 import PropTypes from 'prop-types';
+var Flickity;
+if (canUseDOM) {
+  Flickity = require('flickity');
+}
 
 class FlickityComponent extends Component {
   constructor(props) {
