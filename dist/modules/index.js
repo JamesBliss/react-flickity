@@ -27,6 +27,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Flickity = void 0;
 if (_ExecutionEnvironment.canUseDOM) {
   Flickity = require('flickity');
+
+  Flickity.prototype._createResizeClass = function () {
+    this.element.classList.add('flickity-resize');
+  };
+
+  Flickity.createMethods.push('_createResizeClass');
+
+  var resize = Flickity.prototype.resize;
+  Flickity.prototype.resize = function () {
+    this.element.classList.remove('flickity-resize');
+    resize.call(this);
+    this.element.classList.add('flickity-resize');
+  };
 }
 
 var FlickityComponent = function (_Component) {

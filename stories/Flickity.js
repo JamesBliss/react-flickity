@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
@@ -146,6 +146,63 @@ stories.add('Flickity - Flickity Expose and manual control',
           <button onClick={flickityPrevious}>Previous</button>
           <button onClick={flickityNext}>Next</button>
           <button onClick={flickitySelect2}>Select 2nd item</button>
+        </div>
+      </div>
+    );
+  })
+);
+
+let testFlickityInstance = null;
+class Carousel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: [
+        'https://source.unsplash.com/1400x420/?city',
+        'https://source.unsplash.com/1400x420/?nature',
+        'https://source.unsplash.com/1400x420/?people',
+        'https://source.unsplash.com/1400x420/?london',
+        'https://source.unsplash.com/1400x420/?forest',
+        'https://source.unsplash.com/1400x420/?town'
+      ]
+    };
+  }
+
+  imageLoaded = () => {
+    console.log(testFlickityInstance)
+    // testFlickityInstance.reloadCells();
+  }
+
+  renderItems = () => {
+    const { images } = this.state;
+
+    return images.map((img, index) => {
+      return (
+        <div key={index} style={{ overflow: 'hidden', padding: 0, margin: 0, width: '50%' }}>
+          <img
+            onLoad={ this.imageLoaded.bind(this) }
+            src={ img }
+          />
+        </div>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <Flickity flickityRef={(ref) => testFlickityInstance = ref} options={ { wrapAround: true } }>
+        {this.renderItems()}
+      </Flickity>
+    );
+  }
+}
+
+stories.add('Flickity - Flickity mapping children',
+  withInfo({ text: 'Basic carousel component' })(() => {
+    return (
+      <div>
+        <div>
+          <Carousel />
         </div>
       </div>
     );

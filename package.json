@@ -1,6 +1,6 @@
 {
   "name": "@jamesbliss/react-flickity",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Flickity in react",
   "main": "./dist/modules/index.js",
   "scripts": {
@@ -23,10 +23,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "babel-eslint": "^8.2.1",
     "fbjs": "^0.8.16",
     "flickity": "^2.0.10",
     "prop-types": "^15.5.10",
-    "react": "^15.6.0"
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.6",
